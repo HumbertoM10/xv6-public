@@ -560,3 +560,10 @@ procdump(void)
 void printHello(void){
   cprintf("Hola desde el console");
 }
+
+void killer(void){
+  if (myproc()!=0){
+    cprintf("\n %s The process has been killed \n", myproc()->name);
+    kill(myproc()->pid);
+  }
+}

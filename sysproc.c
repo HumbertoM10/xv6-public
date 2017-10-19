@@ -110,3 +110,31 @@ int sys_set_priority(void)
   myproc()->priority = priority;
   return 0;
 }
+
+int
+sys_getppid(void)
+{
+  struct proc *parent = myproc()->parent;
+  if(parent)
+    return parent->pid;
+  else
+    return -1;
+}
+
+// set a signal handler of the current process
+int
+sys_signal(void)
+{
+  int signum;
+  int handler;
+
+  if(argint(0, &signum) < 0)
+    return -1;
+  if(argint(1, &handler) < 0)
+    return -1;
+  if(signum < 1 || signum > 4)
+    return -1;
+
+  myproc()->signals[signum - 1] = (sighandler_t*)handler;
+  return signum;
+}

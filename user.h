@@ -34,6 +34,7 @@ int shdemat(int);
 int getppid(void);
 int signal(int, sighandler_t);
 void killsignal(int, int);
+int chmod(char *, char *);
 
 // ulib.c
 int stat(char*, struct stat*);

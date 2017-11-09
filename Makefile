@@ -184,9 +184,10 @@ UPROGS=\
 	_rename\
 	_cp\
 	_chmod\
+	_login\
 
-fs.img: mkfs README $(UPROGS)
-	./mkfs fs.img README $(UPROGS)
+fs.img: mkfs README passwd $(UPROGS)
+	./mkfs fs.img README passwd $(UPROGS)
 
 -include *.d
 

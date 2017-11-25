@@ -602,3 +602,47 @@ int sys_killsignal(void) {
  p->tf->eip = (uint)p->signals[signum];
  return 1;
 }
+
+
+int compare_str(char *a, char *b) {
+  int size_a = strlen(a);
+  int size_b = strlen(b);
+
+  if (size_a != size_b){
+    return 0;
+  }
+
+  int i = 0;
+  while (i < size_a) 
+  {
+    if (a[i] != b[i]){
+      return 0;
+    }
+    i++;
+  }
+  return 1;
+}
+
+int sys_logout(void) {
+
+  struct proc *p_sh;
+  struct proc *p_login;
+
+  char *sh_name = "sh";
+  char *login_name = "login";
+
+  // Find sh
+  for(p_sh = ptable.proc; p_sh < &ptable.proc[NPROC]; p_sh++)
+    if (compare_str(p_sh->name, sh_name))
+      break;
+  
+  // Find login
+  for(p_login = ptable.proc; p_login < &ptable.proc[NPROC]; p_login++)
+    if (compare_str(p_login->name, login_name))
+      break;
+
+  //kill(p_sh->pid);
+  kill(p_login->pid);
+
+  return 1;
+}

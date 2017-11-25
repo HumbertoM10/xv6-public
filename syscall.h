@@ -30,3 +30,4 @@
 #define SYS_signal        29
 #define SYS_killsignal    30
 #define SYS_chmod	      31
+#define SYS_logout	      32
